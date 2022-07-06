@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { Provider } from './Context'
+import Input from './input'
+import Tabledata from './Tabledata'
+
+
 
 function App() {
+    const [data,setdata] = useState("")
+    const retrivedata = (list) => {
+        setdata(list)
+    }
+    const deleteupdate = (items) => {
+        setdata(items)
+    }
+    const onsaveddata =(items) => {
+        setdata(items)
+    }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Input retrivedata={retrivedata}/>        
+        <Provider value={data}>
+            <Tabledata deleteupdate={deleteupdate} onsaveddata={onsaveddata}/>
+        </Provider>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
